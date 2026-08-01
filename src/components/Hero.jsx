@@ -18,10 +18,30 @@ const Hero = ({ onPreloadComplete }) => {
     const target = "PORTFOLIO";
     const start = "LEESHARK";
     let iterations = 0;
+    let intervalId;
+    let timeoutId;
 
-    // Give a small delay before scrambling starts
-    setTimeout(() => {
-      const interval = setInterval(() => {
+    const imageLoadPromise = new Promise((resolve) => {
+      const img = new window.Image();
+      img.src = centerImage;
+      if (img.complete) {
+        resolve();
+      } else {
+        img.onload = resolve;
+        img.onerror = resolve;
+      }
+    });
+
+    const delayPromise = new Promise((resolve) => {
+      timeoutId = setTimeout(resolve, 1000);
+    });
+
+    let isMounted = true;
+
+    Promise.all([imageLoadPromise, delayPromise]).then(() => {
+      if (!isMounted) return;
+
+      intervalId = setInterval(() => {
         setText(() => {
           let newText = target.split("").map((letter, index) => {
             if (index < Math.floor(iterations)) {
@@ -36,7 +56,7 @@ const Hero = ({ onPreloadComplete }) => {
         });
 
         if (iterations >= target.length) {
-          clearInterval(interval);
+          clearInterval(intervalId);
 
           // GSAP Animation Sequence
           const tl = gsap.timeline({
@@ -70,10 +90,13 @@ const Hero = ({ onPreloadComplete }) => {
         }
         iterations += 1 / 3; // Controls the speed of the letter swap
       }, 50); // 50ms per step
-    }, 1000); // 1 second initial wait before morph starts
+    });
 
     return () => {
+      isMounted = false;
       document.body.style.overflow = 'auto';
+      clearTimeout(timeoutId);
+      clearInterval(intervalId);
     };
   }, []);
 
