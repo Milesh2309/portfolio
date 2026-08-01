@@ -87,12 +87,20 @@ const servicesData = [
 const Services = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [activeScrollIndex, setActiveScrollIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const itemRefs = useRef([]);
   
   const targetIndexRef = useRef(0);
   const currentIndexRef = useRef(0);
   const timerRef = useRef(null);
   const titleRef = useRef(null);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize(); // Check initially
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (titleRef.current) {
@@ -163,7 +171,7 @@ const Services = () => {
   }, []);
 
   return (
-    <section id="service" className="min-h-screen bg-[#050505] text-white pt-12 pb-24 px-6 md:px-16 flex flex-col relative overflow-hidden">
+    <section id="service" className="min-h-screen bg-[#050505] text-white pt-12 pb-12 md:pb-24 px-6 md:px-16 flex flex-col relative overflow-hidden">
       
       {/* Top Header Section */}
       <div className="flex flex-col md:flex-row items-end md:items-start justify-end w-full mt-0 z-0 pb-12">
@@ -177,13 +185,16 @@ const Services = () => {
 
       {/* Accordion List */}
       <div className="z-10 relative mt-0 -mx-6 md:-mx-16 border-t border-white/20">
-        {servicesData.map((service, index) => (
+        {servicesData.map((service, index) => {
+          const isHighlighted = isMobile ? activeIndex === index : activeScrollIndex === index;
+          
+          return (
           <div 
             key={service.id} 
             ref={(el) => itemRefs.current[index] = el}
             data-index={index}
             className={`border-b border-white/20 py-3 md:py-5 px-6 md:px-16 cursor-pointer transition-all duration-700 ease-in-out ${
-              activeScrollIndex === index ? 'bg-[#ccff00]' : ''
+              isHighlighted ? 'bg-[#ccff00]' : ''
             }`}
             onClick={() => setActiveIndex(activeIndex === index ? null : index)}
           >
@@ -194,7 +205,7 @@ const Services = () => {
                 <div className="flex items-start gap-3 md:gap-16 w-full min-w-0">
                   <div className="h-7 flex items-center md:h-auto md:block flex-shrink-0">
                     <span className={`text-lg md:text-3xl font-medium transition-colors duration-700 ease-in-out leading-none ${
-                      activeScrollIndex === index ? 'text-black' : 'text-white'
+                      isHighlighted ? 'text-black' : 'text-white'
                     }`}>
                       {service.id}
                     </span>
@@ -202,7 +213,7 @@ const Services = () => {
                   <div className="flex flex-col w-full min-w-0">
                     <div className="h-7 flex items-center md:h-auto md:block">
                       <h3 className={`text-[11px] sm:text-sm md:text-xl lg:text-2xl font-black uppercase tracking-wide leading-none transition-colors duration-700 ease-in-out whitespace-nowrap overflow-hidden text-ellipsis ${
-                        activeScrollIndex === index ? 'text-black' : 'text-white'
+                        isHighlighted ? 'text-black' : 'text-white'
                       }`}>
                         {service.title}
                       </h3>
@@ -216,12 +227,12 @@ const Services = () => {
                     >
                       <div className="pt-6 lg:pt-8 flex flex-col gap-3">
                         <ul className={`transition-colors duration-700 ease-in-out text-sm md:text-base font-light space-y-2 flex flex-col ${
-                          activeScrollIndex === index ? 'text-black/80' : 'text-gray-300'
+                          isHighlighted ? 'text-black/80' : 'text-gray-300'
                         }`}>
                           {service.capabilities.map((cap, i) => (
                             <li key={i} className="flex items-start gap-3">
                               <span className={`transition-colors duration-700 ease-in-out mt-1.5 opacity-70 text-[10px] ${
-                                activeScrollIndex === index ? 'text-black' : 'text-[#ccff00]'
+                                isHighlighted ? 'text-black' : 'text-[#ccff00]'
                               }`}>■</span>
                               <span>{cap}</span>
                             </li>
@@ -237,7 +248,7 @@ const Services = () => {
                   <svg 
                     xmlns="http://www.w3.org/2000/svg" 
                     className={`w-6 h-6 transition-all duration-700 ${
-                      activeScrollIndex === index ? 'text-black' : 'text-[#ccff00]'
+                      isHighlighted ? 'text-black' : 'text-[#ccff00]'
                     } ${activeIndex === index ? '-rotate-45' : 'rotate-45'}`} 
                     fill="none" 
                     viewBox="0 0 24 24" 
@@ -260,13 +271,13 @@ const Services = () => {
                 >
                    <div className="pt-4 md:pt-6 lg:pt-[72px] flex flex-col gap-6 w-full pr-0 lg:pr-12">
                      <p className={`transition-colors duration-700 ease-in-out text-base md:text-lg leading-relaxed max-w-lg font-light ${
-                       activeScrollIndex === index ? 'text-black/80' : 'text-gray-300'
+                       isHighlighted ? 'text-black/80' : 'text-gray-300'
                      }`}>
                        {service.description}
                      </p>
                      {service.buttonText && (
                        <button className={`font-bold uppercase tracking-wider text-xs md:text-sm px-6 py-3 border transition-colors duration-700 ease-in-out flex items-center gap-2 mt-4 ${
-                         activeScrollIndex === index ? 'bg-black text-[#ccff00] border-black' : 'bg-[#ccff00] text-black border-[#ccff00]'
+                         isHighlighted ? 'bg-black text-[#ccff00] border-black' : 'bg-[#ccff00] text-black border-[#ccff00]'
                        }`}>
                          <span className="w-2 h-2 border-t border-l border-current"></span>
                          {service.buttonText}
@@ -281,7 +292,7 @@ const Services = () => {
                   <svg 
                     xmlns="http://www.w3.org/2000/svg" 
                     className={`w-10 h-10 transition-all duration-700 ${
-                      activeScrollIndex === index ? 'text-black' : 'text-[#ccff00]'
+                      isHighlighted ? 'text-black' : 'text-[#ccff00]'
                     } ${activeIndex === index ? '-rotate-45' : 'rotate-45'}`} 
                     fill="none" 
                     viewBox="0 0 24 24" 
@@ -296,7 +307,8 @@ const Services = () => {
 
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
       
     </section>

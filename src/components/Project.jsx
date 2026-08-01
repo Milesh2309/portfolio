@@ -49,7 +49,7 @@ const projects = [
 
 const Project = () => {
   return (
-    <div id="project" className="bg-[#050505] w-full text-white pt-20 pb-24 px-6 md:px-16">
+    <div id="project" className="bg-[#050505] w-full text-white pt-10 md:pt-20 pb-24 px-6 md:px-16">
 
       {/* Top Header Section */}
       <div className="flex flex-col lg:flex-row justify-between items-start w-full z-10 gap-12 lg:gap-0 mb-20 lg:mb-32">
