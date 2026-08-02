@@ -6,9 +6,15 @@ import Services from './components/Services';
 import Project from './components/Project';
 import ContactSection from './components/Contact';
 import Footer from './components/Footer';
+import ComingSoon from './components/ComingSoon';
 
 function App() {
   const [preloaderComplete, setPreloaderComplete] = useState(false);
+  const [showComingSoon, setShowComingSoon] = useState(false);
+
+  if (showComingSoon) {
+    return <ComingSoon onBack={() => setShowComingSoon(false)} />;
+  }
 
   return (
     <main>
@@ -19,7 +25,7 @@ function App() {
           <Navbar />
           <About />
           <Services />
-          <Project />
+          <Project onCtaClick={() => setShowComingSoon(true)} />
           <ContactSection />
           <Footer />
         </div>
