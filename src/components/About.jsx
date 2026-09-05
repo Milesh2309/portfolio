@@ -1,29 +1,25 @@
 import React, { useEffect, useRef } from 'react';
-import aboutImage from '../assets/about_section/about_section.png';
+import aboutImage from '../assets/intro_cutout.png';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const frontendSkills = ["React.js", "Next.js", "React Native", "TypeScript", "JavaScript", "Tailwind CSS", "Bootstrap", "Material UI", "HTML5"];
-const backendSkills = ["Python", "FastAPI", "Node.js", "Express.js", "REST APIs", "Database", "MongoDB", "PostgreSQL"];
+const backendSkills = ["PHP", "Laravel", "Node.js", "Express.js", "MySQL", "MongoDB", "PostgreSQL", "REST APIs", "Python"];
 const aiSkills = ["ChatGPT", "Claude", "Cursor AI", "GitHub Copilot", "Google Gemini", "LangChain", "MCP", "Prompt Engineering", "Agentic AI"];
 const toolsSkills = ["Git", "GitHub", "Docker", "Postman", "VS Code", "CI/CD"];
 
 const aboutWords = [
   { text: "Hey," }, { text: "I'm" },
-  { text: "Leeshark.", className: "font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400" },
-  { text: "An" }, { text: "enthusiastic" }, { text: "AI" }, { text: "full-stack" }, { text: "developer" }, { text: "who" }, { text: "loves" }, { text: "to" }, { text: "build" }, { text: "state-of-the-art" }, { text: "web" }, { text: "and" }, { text: "mobile" }, { text: "applications." },
+  { text: "Mileshkumar.", className: "font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400" },
+  { text: "An" }, { text: "enthusiastic" }, { text: "full-stack" }, { text: "developer" }, { text: "who" }, { text: "loves" }, { text: "to" }, { text: "build" }, { text: "state-of-the-art" }, { text: "web" }, { text: "and" }, { text: "mobile" }, { text: "applications." },
   { text: "I" }, { text: "love" }, { text: "turning" }, { text: "concepts" }, { text: "into" }, { text: "scalable" }, { text: "products" }, { text: "using" }, { text: "tech" }, { text: "stack" }, { text: "like" },
   { text: "React,", className: "text-white font-medium" },
-  { text: "FastAPI,", className: "text-white font-medium" },
   { text: "Node.js,", className: "text-white font-medium" },
-  { text: "and" }, { text: "artificial" }, { text: "intelligence" }, { text: "technologies." },
-  { text: "I" }, { text: "always" }, { text: "strive" }, { text: "to" }, { text: "keep" }, { text: "my" }, { text: "code" }, { text: "clean" }, { text: "and" }, { text: "design" }, { text: "great" }, { text: "user" }, { text: "experience" }, { text: "along" }, { text: "with" }, { text: "learning" }, { text: "new" }, { text: "technologies" }, { text: "like" },
-  { text: "LLMs,", className: "text-white font-medium" },
-  { text: "Langchain,", className: "text-white font-medium" },
-  { text: "and" },
-  { text: "MCP.", className: "text-white font-medium" }
+  { text: "MongoDB,", className: "text-white font-medium" },
+  { text: "and" }, { text: "modern" }, { text: "web" }, { text: "technologies." },
+  { text: "I" }, { text: "always" }, { text: "strive" }, { text: "to" }, { text: "keep" }, { text: "my" }, { text: "code" }, { text: "clean" }, { text: "and" }, { text: "design" }, { text: "great" }, { text: "user" }, { text: "experience" }, { text: "along" }, { text: "with" }, { text: "learning" }, { text: "new" }, { text: "cutting-edge" }, { text: "technologies." }
 ];
 
 const About = () => {
@@ -89,11 +85,11 @@ const About = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 lg:gap-24 items-center">
 
           {/* Left Column - Image */}
-          <div className="flex justify-center lg:justify-start pl-0 lg:pl-20">
+          <div className="flex justify-center lg:justify-start pl-0 lg:pl-16">
             <img
               src={aboutImage}
-              alt="About"
-              className="w-48 md:w-56 lg:w-64 object-contain drop-shadow-2xl"
+              alt="Mileshkumar Vaghela"
+              className="w-56 md:w-64 lg:w-72 max-h-[500px] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
             />
           </div>
 

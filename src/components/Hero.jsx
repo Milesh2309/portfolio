@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import centerImage from '../assets/hero_assets/hero_center.png';
+import centerImage from '../assets/milesh_cutout.png';
 
 const Hero = ({ onPreloadComplete }) => {
-  const [text, setText] = useState('LEESHARK');
+  const [text, setText] = useState('MILESH');
   const containerRef = useRef(null);
   const textRef = useRef(null);
   const subtitleRef = useRef(null);
@@ -16,7 +16,7 @@ const Hero = ({ onPreloadComplete }) => {
     document.body.style.overflow = 'hidden';
 
     const target = "PORTFOLIO";
-    const start = "LEESHARK";
+    const start = "MILESH";
     let iterations = 0;
     let intervalId;
     let timeoutId;
@@ -122,7 +122,7 @@ const Hero = ({ onPreloadComplete }) => {
           ref={subtitleRef}
           className="absolute -bottom-8 left-1/2 -translate-x-1/2 md:translate-x-0 md:-bottom-12 md:left-8 text-white text-base md:text-2xl lg:text-4xl drop-shadow-md z-10 opacity-0 w-max"
         >
-          <span className="font-bold">Software</span> <span className="font-light italic text-gray-300">Developer</span>
+          <span className="font-bold">Full Stack</span> <span className="font-light italic text-gray-300">Developer</span>
         </p>
 
         <div
@@ -147,8 +147,8 @@ const Hero = ({ onPreloadComplete }) => {
       >
         <img
           src={centerImage}
-          alt="Hero Center Graphic"
-          className="w-full max-w-md object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+          alt="Mileshkumar Vaghela"
+          className="w-full max-w-sm md:max-w-md lg:max-w-lg max-h-[78vh] object-contain drop-shadow-[0_20px_60px_rgba(0,0,0,0.9)]"
         />
       </div>
     </section>
